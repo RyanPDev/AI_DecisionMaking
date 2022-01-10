@@ -18,15 +18,8 @@ draw_sprite(false),
 graph(_graph),
 isInVersusScene(_isInVersusScene)
 {
-	if (isInVersusScene)
 		pathfinding = new ModifiedAStar();
-	else
-	{
-		pathfinding = new BFS();
-		//pathfinding = new Dijkstra();
-		//pathfinding = new Greedy();
-		//pathfinding = new AStar();
-	}
+	
 }
 
 Agent::~Agent()

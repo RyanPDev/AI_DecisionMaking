@@ -9,8 +9,6 @@
 #include "utils.h"
 #include "Graph.h"
 #include "Pathfinding.h"
-#include "BFS.h"
-#include "Dijkstra.h"
 #include "Greedy.h"
 #include "ModifiedAStar.h"
 #include "Astar.h"

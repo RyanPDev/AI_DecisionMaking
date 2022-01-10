@@ -6,7 +6,6 @@
 #include <time.h>
 #include "Scene.h"
 #include "Agent.h"
-#include "Seek.h"
 #include "PathFollowing.h"
 #include "Grid.h"
 #include "Graph.h"
@@ -23,7 +22,7 @@ public:
 
 private:
 	Grid* maze;
-	Graph graph;
+	Graph graph; //--> GOES TO BLACKBOARD
 	bool draw_grid;
 	int count = 1;
 	std::vector<Agent*> agents;

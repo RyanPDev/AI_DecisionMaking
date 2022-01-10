@@ -2,12 +2,12 @@
 
 ModifiedAStar::ModifiedAStar()
 {
-	
+
 }
 
 ModifiedAStar::~ModifiedAStar()
 {
-	
+
 }
 
 void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vector2D goal)
@@ -15,7 +15,7 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 	float newCost = 0;
 	count = 1;
 	start = pix2cell(start);
-	while(graph.nodes[start.y][start.x] == nullptr || !graph.nodes[start.y][start.x]->isValid)
+	while (graph.nodes[start.y][start.x] == nullptr || !graph.nodes[start.y][start.x]->isValid)
 	{
 		Vector2D aux = goal - start;
 		aux.Normalize();
@@ -39,7 +39,7 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 		if (pix2cell(current->position) == goal) //early exit
 		{
 			GetPath(path, start, current);
-			
+
 			break;
 		}
 
@@ -53,7 +53,7 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 				if (next->heuristic == 0)
 					next->heuristic = Heuristic(pix2cell(next->position), goal);
 
-				next->priority = (newCost*alpha) + (next->heuristic*beta);
+				next->priority = (newCost * alpha) + (next->heuristic * beta);
 				next->cameFrom = current;
 				frontier.push(next);
 			}
