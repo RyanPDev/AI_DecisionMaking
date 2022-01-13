@@ -6,21 +6,26 @@
 class Blackboard
 {
 private:
-	Graph graph;
-	std::unordered_map<std::string, void*> blackboard;
 
 	float seeDistance; // also for cone
 	float coneAngle;
+	bool playerInSight,playerHasGun;
+
 
 public:
+	Graph graph;
 	Blackboard(Graph);
 	~Blackboard();
 
 	//SETTERS
-	void setSeeDistance(float _newSeeDistance) { seeDistance = _newSeeDistance; }
-	void setConeAngle(float _newConeAngle) { coneAngle = _newConeAngle; }
+	void SetSeeDistance(float _newSeeDistance) { seeDistance = _newSeeDistance; }
+	void SetConeAngle(float _newConeAngle) { coneAngle = _newConeAngle; }
+	void SetPlayerInSight(bool _isInSight) { playerInSight = _isInSight; }
+	void SetPlayerHasGun(bool _hasGun) { playerHasGun = _hasGun; }
 
 	//GETTERS
 	float GetSeeDistance() const { return seeDistance; }
 	float GetConeAngle() const { return coneAngle; }
+	float GetPlayerInSight() const { return playerInSight; }
+	float GetPlayerHasGun() const { return playerHasGun; }
 };

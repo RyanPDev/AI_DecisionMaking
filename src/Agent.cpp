@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Agent::Agent(Graph _graph, bool _isInVersusScene) : sprite_texture(0),
+Agent::Agent(Graph _graph, bool _isInVersusScene, Scene* Scene) : sprite_texture(0),
 position(Vector2D(100, 100)),
 target(Vector2D(1000, 100)),
 velocity(Vector2D(0, 0)),
@@ -15,11 +15,10 @@ sprite_num_frames(0),
 sprite_w(0),
 sprite_h(0),
 draw_sprite(false),
-graph(_graph),
 isInVersusScene(_isInVersusScene)
 {
+		blackBoard = new Blackboard(_graph);
 		pathfinding = new ModifiedAStar();
-	
 }
 
 Agent::~Agent()
@@ -163,7 +162,7 @@ void Agent::ChooseNewGoal(std::vector<Vector2D*> coins)
 		start = position;
 
 	clearPath();
-	pathfinding->CalculatePath(graph, path, start, *currentGoal);
+	pathfinding->CalculatePath(blackBoard->graph, path, start, *currentGoal);
 }
 
 void Agent::draw(bool drawCircles)

@@ -14,7 +14,7 @@ CoinBattleScene::CoinBattleScene()
 
 	for (int i = 0; i < NUM_AGENTS; i++)
 	{
-		Agent* agent = new Agent(graph, true);
+		Agent* agent = new Agent(graph, true,this);
 		agent->loadSpriteTexture("../res/soldier.png", 4);
 		agent->setBehavior(new PathFollowing);
 		agent->setTarget(Vector2D(-20, -20));
@@ -82,12 +82,12 @@ void CoinBattleScene::update(float dtime, SDL_Event* event)
 	//Checks distance between agents. If they're close enough, start modifiying weights around them so they can evade each other
 	if (CalculateDistance(agents[0]->getPosition(), agents[1]->getPosition()) < evasiveDistance)
 	{
-		agents[0]->graph.ResetAllWeights(maze->terrain);
-		agents[0]->graph.ChangeWeights(agents[1]->getPosition(), 100000, 20000, 10000);
+		agents[0]->blackBoard->graph.ResetAllWeights(maze->terrain);
+		agents[0]->blackBoard->graph.ChangeWeights(agents[1]->getPosition(), 100000, 20000, 10000);
 		agents[0]->ChooseNewGoal(coinsPosition);
 
-		agents[1]->graph.ResetAllWeights(maze->terrain);
-		agents[1]->graph.ChangeWeights(agents[0]->getPosition(), 100000, 20000, 10000);
+		agents[1]->blackBoard->graph.ResetAllWeights(maze->terrain);
+		agents[1]->blackBoard->graph.ChangeWeights(agents[0]->getPosition(), 100000, 20000, 10000);
 		agents[1]->ChooseNewGoal(coinsPosition);
 	}
 
@@ -110,7 +110,7 @@ void CoinBattleScene::update(float dtime, SDL_Event* event)
 			}
 			for (Agent* a_ : agents)
 			{
-				a_->graph.ResetAllWeights(maze->terrain);
+				a_->blackBoard->graph.ResetAllWeights(maze->terrain);
 				a_->ChooseNewGoal(coinsPosition);
 			}
 		}

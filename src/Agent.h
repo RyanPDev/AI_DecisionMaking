@@ -12,6 +12,10 @@
 #include "Greedy.h"
 #include "ModifiedAStar.h"
 #include "Astar.h"
+#include "Blackboard.h"
+#include "SensorySystem.h"
+
+class Scene;
 
 class Agent
 {
@@ -31,6 +35,7 @@ private:
 	Vector2D position;
 	Vector2D velocity;
 	Vector2D target;
+	SensorySystem *sensors;
 
 	// Pathfinding
 	int currentTargetIndex;
@@ -52,13 +57,14 @@ private:
 	}
 
 public:
-	Agent(Graph,bool);
+	Agent(Graph,bool, Scene*);
 	~Agent();
 	Vector2D getPosition();
 	Vector2D getTarget();
 	Vector2D getVelocity();
 	Path path;
-	Graph graph;
+
+	Blackboard* blackBoard;
 	float getMaxVelocity();
 	float getMaxForce();
 	float getMass();

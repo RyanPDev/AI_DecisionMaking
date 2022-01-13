@@ -13,7 +13,7 @@ AlgorithmsScene::AlgorithmsScene()
 	// We don't do that here
 	// srand((unsigned int)time(NULL));
 
-	Agent* agent = new Agent(graph, false);
+	Agent* agent = new Agent(graph, false, this);
 	agent->loadSpriteTexture("../res/soldier.png", 4);
 	agent->setBehavior(new PathFollowing);
 	agent->setTarget(Vector2D(-20, -20));
@@ -33,7 +33,7 @@ AlgorithmsScene::AlgorithmsScene()
 		count++;
 		a->setPosition(cell2pix(rand_cell));
 		a->clearPath();
-		a->pathfinding->CalculatePath(a->graph, a->path, a->getPosition(), coinPosition);
+		a->pathfinding->CalculatePath(a->blackBoard->graph, a->path, a->getPosition(), coinPosition);
 
 	}
 }
@@ -79,7 +79,7 @@ void AlgorithmsScene::update(float dtime, SDL_Event* event)
 			count++;
 			ReplaceCoinPosition();
 			a->clearPath();
-			a->pathfinding->CalculatePath(a->graph, a->path, a->getPosition(), coinPosition);
+			a->pathfinding->CalculatePath(a->blackBoard->graph, a->path, a->getPosition(), coinPosition);
 
 		}
 	}
