@@ -1,3 +1,4 @@
+#pragma once
 
 class Agent;
 class Scene;
@@ -12,6 +13,4 @@ public:
 	~SensorySystem();
 
 	void Update(Agent* agent, float dTime);
-
 };
-

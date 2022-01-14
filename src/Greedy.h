@@ -1,6 +1,7 @@
 #pragma once
 #include "Pathfinding.h"
 #include <queue>
+
 class Greedy :
     public Pathfinding
 {
@@ -19,5 +20,3 @@ class Greedy :
 		
 		void Clear(std::priority_queue < Graph::Node*, std::vector<Graph::Node*>, CompareHeuristic >&q, Graph graph);
 };
-
-

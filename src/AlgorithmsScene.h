@@ -1,14 +1,7 @@
 #pragma once
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <time.h>
-#include "Scene.h"
-#include "Agent.h"
-#include "PathFollowing.h"
-#include "Grid.h"
-#include "Graph.h"
+#include "Scene.h" //--> ojo, dos includes vector
+#include "Grid.h" //--> ojo, dos includes vector
+
 class AlgorithmsScene :
 	public Scene
 {
@@ -21,7 +14,7 @@ public:
 
 private:
 	int count = 1;
-	std::vector<Agent*> agents;
+	//std::vector<Agent*> agents;
 	Vector2D coinPosition;
 	void ReplaceCoinPosition();
 	Grid* maze;

@@ -1,4 +1,8 @@
 #include "AlgorithmsScene.h"
+#include "PathFollowing.h"
+#include "utils.h"
+#include <iostream>
+
 using namespace std;
 
 AlgorithmsScene::AlgorithmsScene()

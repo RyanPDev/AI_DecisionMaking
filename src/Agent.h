@@ -1,19 +1,17 @@
 #pragma once
-#include <iostream>
-#include <minmax.h>
-#include <SDL.h>
-#include <SDL_image.h>
-#include "SDL_SimpleApp.h"
-#include "Path.h"
-#include "Vector2D.h"
-#include "utils.h"
-#include "Graph.h"
+//#include <iostream>
+//#include <SDL.h>
+//#include <SDL_image.h>
 #include "Pathfinding.h"
-#include "Greedy.h"
-#include "ModifiedAStar.h"
-#include "Astar.h"
-#include "Blackboard.h"
 #include "SensorySystem.h"
+#include "Blackboard.h"
+
+//#define SRC_WIDTH 1280
+//#define SRC_HEIGHT 768
+//#define CELL_SIZE 32
+//
+//#define FRAMES_PER_SEC 30
+//#define MAX_DTIME 0.05
 
 class Scene;
 

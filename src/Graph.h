@@ -1,7 +1,13 @@
 #pragma once
 #include <vector>
-#include "Vector2D.h"
 #include "SDL_SimpleApp.h"
+
+//#define SRC_WIDTH 1280
+//#define SRC_HEIGHT 768
+//#define CELL_SIZE 32
+//
+//#define FRAMES_PER_SEC 30
+//#define MAX_DTIME 0.05
 
 class Graph
 {
@@ -12,7 +18,6 @@ public:
 	void ChangeWeights(Vector2D position, float, float,float);
 	void AddAllNeighbours();
 
-	void DrawGraph();
 	Vector2D pix2cell(Vector2D pix)
 	{
 		return Vector2D((float)((int)pix.x / CELL_SIZE), (float)((int)pix.y / CELL_SIZE));

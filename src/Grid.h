@@ -4,8 +4,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include "Agent.h"
-#include "utils.h"
+#include "Vector2D.h"
 
 
 class Grid

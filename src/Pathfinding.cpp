@@ -1,4 +1,5 @@
 #include "Pathfinding.h"
+#include "utils.h"
 
 Pathfinding::Pathfinding() { count = 1; }
 Pathfinding::~Pathfinding() {}

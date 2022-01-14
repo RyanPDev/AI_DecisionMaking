@@ -1,6 +1,8 @@
 #pragma once
 #include "Pathfinding.h"
 #include <queue>
+
+
 class ModifiedAStar :
     public Pathfinding
 {

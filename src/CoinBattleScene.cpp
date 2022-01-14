@@ -1,4 +1,7 @@
 #include "CoinBattleScene.h"
+#include "PathFollowing.h"
+#include "utils.h"
+#include <iostream>
 
 using namespace std;
 
@@ -40,7 +43,7 @@ CoinBattleScene::CoinBattleScene()
 		while (!maze->isValidCell(rand_cell))
 			rand_cell = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
 
-		std::cout << "Instancia " << count << ":" << std::endl;
+		//std::cout << "Instancia " << count << ":" << std::endl;
 		count++;
 
 		// set agent position coords to the center of a random cell
@@ -98,7 +101,7 @@ void CoinBattleScene::update(float dtime, SDL_Event* event)
 
 		if (pix2cell(a->getPosition()) == *a->currentGoal)
 		{
-			std::cout << "Instancia " << count << ":" << std::endl;
+			//std::cout << "Instancia " << count << ":" << std::endl;
 			count++;
 			for (Vector2D* c : coinsPosition)
 			{
