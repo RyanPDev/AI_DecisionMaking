@@ -13,9 +13,9 @@ private:
 
 
 public:
-	Graph graph;
 	Blackboard(Graph);
 	~Blackboard();
+	Graph graph;
 
 	//SETTERS
 	void SetSeeDistance(float _newSeeDistance) { seeDistance = _newSeeDistance; }

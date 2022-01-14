@@ -4,11 +4,9 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include "Scene.h"
-#include "Agent.h"
-#include "PathFollowing.h"
 #include "Grid.h"
 #include "Graph.h"
+#include "Scene.h"
 
 class CoinBattleScene :
 	public Scene
@@ -25,8 +23,7 @@ private:
 	Graph graph; //--> GOES TO BLACKBOARD
 	bool draw_grid;
 	int count = 1;
-	std::vector<Agent*> agents;
-	Agent player;
+	//Agent player;
 	const int NUM_AGENTS = 2;
 	const int MAX_COINS = 5;
 	const float evasiveDistance = 64;

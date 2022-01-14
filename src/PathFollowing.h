@@ -1,6 +1,6 @@
 #pragma once
 #include "Agent.h"
-#include "Vector2D.h"
+#include "Path.h"
 
 class PathFollowing :
 	public Agent::SteeringBehavior

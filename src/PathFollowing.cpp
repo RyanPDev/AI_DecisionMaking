@@ -1,4 +1,5 @@
 #include "PathFollowing.h"
+#include "Vector2D.h"
 
 PathFollowing::PathFollowing()
 {

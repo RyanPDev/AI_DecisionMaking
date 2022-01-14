@@ -1,8 +1,6 @@
 #pragma once
-#include "utils.h"
-#include "Graph.h"
 #include "Path.h"
-#include <algorithm>
+#include "Graph.h"
 
 class Pathfinding
 {

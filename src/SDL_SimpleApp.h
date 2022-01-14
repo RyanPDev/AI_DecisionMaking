@@ -1,8 +1,5 @@
 #pragma once
-#include <iostream>
-#include <SDL.h>
 #include <SDL_image.h>
-#include "Scene.h"
 #include "Vector2D.h"
 
 #define SRC_WIDTH 1280
@@ -11,6 +8,8 @@
 
 #define FRAMES_PER_SEC 30
 #define MAX_DTIME 0.05
+
+class Scene;
 
 class SDL_SimpleApp
 {
@@ -22,7 +21,6 @@ private:
 	int win_width;
 	int win_height;
 	int grid_cell_size;
-	SDL_Color bg_color;
 	bool win_fullscreen;
 	float last_update;
 

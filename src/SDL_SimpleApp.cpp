@@ -1,4 +1,8 @@
 #include "SDL_SimpleApp.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
+#include "Scene.h"
 
 using namespace std;
 

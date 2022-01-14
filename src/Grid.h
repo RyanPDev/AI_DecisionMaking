@@ -4,9 +4,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include "Agent.h"
-#include "utils.h"
-
+#include "Vector2D.h"
 
 class Grid
 {
@@ -17,7 +15,6 @@ public:
 private:
 	int num_cell_x;
 	int num_cell_y;
-
 
 public:
 	

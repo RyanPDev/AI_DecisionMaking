@@ -1,4 +1,7 @@
 #include "Agent.h"
+#include "ModifiedAStar.h"
+#include "utils.h"
+#include <iostream>
 
 using namespace std;
 

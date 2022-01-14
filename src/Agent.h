@@ -1,19 +1,7 @@
 #pragma once
-#include <iostream>
-#include <minmax.h>
-#include <SDL.h>
-#include <SDL_image.h>
-#include "SDL_SimpleApp.h"
-#include "Path.h"
-#include "Vector2D.h"
-#include "utils.h"
-#include "Graph.h"
 #include "Pathfinding.h"
-#include "Greedy.h"
-#include "ModifiedAStar.h"
-#include "Astar.h"
-#include "Blackboard.h"
 #include "SensorySystem.h"
+#include "Blackboard.h"
 
 class Scene;
 

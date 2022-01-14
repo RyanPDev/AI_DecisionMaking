@@ -1,4 +1,8 @@
 #include "AlgorithmsScene.h"
+#include "PathFollowing.h"
+#include "utils.h"
+#include <iostream>
+
 using namespace std;
 
 AlgorithmsScene::AlgorithmsScene()
@@ -9,9 +13,6 @@ AlgorithmsScene::AlgorithmsScene()
 	graph = Graph(maze->terrain);
 
 	loadTextures("../res/maze.png", "../res/coin.png");
-	
-	// We don't do that here
-	// srand((unsigned int)time(NULL));
 
 	Agent* agent = new Agent(graph, false, this);
 	agent->loadSpriteTexture("../res/soldier.png", 4);
@@ -138,13 +139,8 @@ void AlgorithmsScene::drawMaze()
 				rect = { (int)coords.x, (int)coords.y, CELL_SIZE, CELL_SIZE };
 				SDL_RenderFillRect(TheApp::Instance()->getRenderer(), &rect);
 			}
-			else {
-				// Do not draw if it is not necessary (bg is already black)
-			}
 		}
 	}
-	//Alternative: render a backgroud texture:
-	//SDL_RenderCopy(TheApp::Instance()->getRenderer(), background_texture, NULL, NULL );
 }
 
 void AlgorithmsScene::drawCoin()
