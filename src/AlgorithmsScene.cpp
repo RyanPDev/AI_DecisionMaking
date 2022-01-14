@@ -30,8 +30,6 @@ AlgorithmsScene::AlgorithmsScene()
 
 	for (Agent* a : agents)
 	{
-		std::cout << "Instancia " << count << ":" << std::endl;
-		count++;
 		a->setPosition(cell2pix(rand_cell));
 		a->clearPath();
 		a->pathfinding->CalculatePath(a->blackBoard->graph, a->path, a->getPosition(), coinPosition);
@@ -76,8 +74,6 @@ void AlgorithmsScene::update(float dtime, SDL_Event* event)
 		// if we have arrived to the coin, replace it in a random cell!
 		if ((pix2cell(a->getPosition()) == coinPosition))
 		{
-			std::cout << "Instancia " << count << ":" << std::endl;
-			count++;
 			ReplaceCoinPosition();
 			a->clearPath();
 			a->pathfinding->CalculatePath(a->blackBoard->graph, a->path, a->getPosition(), coinPosition);

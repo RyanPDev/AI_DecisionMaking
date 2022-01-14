@@ -11,7 +11,7 @@ public:
 	virtual void draw() = 0;
 	virtual const char* getTitle() { return ""; };
 	std::vector<Agent*> agents;
-
+	Agent* player;
 protected:
 	bool drawPaths = false;
 };

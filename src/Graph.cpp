@@ -30,6 +30,17 @@ void Graph::ResetAllWeights(std::vector<std::vector<int>> terrain) // Resets wei
 		}
 	}
 }
+void Graph::ResetAllWeights() // Resets weights to their original state
+{
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		for (int j = 0; j < nodes[i].size(); j++)
+		{
+			if(nodes[i][j]->isValid)
+				nodes[i][j]->weight = 2;
+		}
+	}
+}
 void Graph::ChangeWeights(Vector2D position, float maxValue, float decreaseStrength, float minimumValue) 
 {
 	// Gets the other agent position and then expands recursively changing the vale with a decrease in each iteration untill it reaches a minimum value
@@ -40,6 +51,7 @@ void Graph::ChangeWeights(Vector2D position, float maxValue, float decreaseStren
 		nodes[position.y][position.x]->ChangeWeightRecursive(maxValue,decreaseStrength,minimumValue);
 	}
 }
+
 
 void Graph::AddAllNeighbours()
 {

@@ -13,7 +13,6 @@ public:
 	const char* getTitle();
 
 private:
-	int count = 1;
 	//std::vector<Agent*> agents;
 	Vector2D coinPosition;
 	void ReplaceCoinPosition();

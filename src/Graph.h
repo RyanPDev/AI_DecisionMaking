@@ -8,6 +8,7 @@ public:
 	Graph();
 	Graph(std::vector<std::vector<int>>);
 	void ResetAllWeights(std::vector<std::vector<int>>);
+	void ResetAllWeights();
 	void ChangeWeights(Vector2D position, float, float,float);
 	void AddAllNeighbours();
 
@@ -53,5 +54,6 @@ public:
 			return Vector2D(cell.x * CELL_SIZE + offset, cell.y * CELL_SIZE + offset);
 		}		
 	};
+
 	std::vector<std::vector<Node*>> nodes;	
 };

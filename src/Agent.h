@@ -2,6 +2,8 @@
 #include "Pathfinding.h"
 #include "SensorySystem.h"
 #include "Blackboard.h"
+#include "ModifiedAStar.h"
+#include "DecisionMakingAlgorithm.h"
 
 class Scene;
 
@@ -17,14 +19,16 @@ public:
 	};
 	Pathfinding* pathfinding;
 	Vector2D* currentGoal;
+	SensorySystem *sensors;
 
 private:
 	SteeringBehavior* steering_behaviour;
-	Vector2D position;
 	Vector2D velocity;
 	Vector2D target;
-	SensorySystem *sensors;
+	bool hasSensorySystem;
+	DecisionMakingAlgorithm* brain;
 
+	Vector2D* wanderPosition;
 	// Pathfinding
 	int currentTargetIndex;
 
@@ -44,15 +48,17 @@ private:
 		return Vector2D(cell.x * CELL_SIZE + offset, cell.y * CELL_SIZE + offset);
 	}
 
+	Vector2D position;
 public:
-	Agent(Graph,bool, Scene*);
+	Agent(Graph,bool, Scene*, bool _hasSensorySystem = false);
 	~Agent();
 	Vector2D getPosition();
 	Vector2D getTarget();
 	Vector2D getVelocity();
+	Blackboard* blackBoard;
+	void ReplaceWanderPosition();
 	Path path;
 
-	Blackboard* blackBoard;
 	float getMaxVelocity();
 	float getMaxForce();
 	float getMass();
@@ -62,6 +68,7 @@ public:
 	void setVelocity(Vector2D velocity);
 	void addPathPoint(Vector2D point);
 	void setCurrentTargetIndex(int idx);
+	void ChooseNewGoal();
 	int getCurrentTargetIndex();
 	int getPathSize();
 	Vector2D getPathPoint(int idx);
@@ -69,6 +76,7 @@ public:
 	void update(float dtime, SDL_Event* event);
 	void draw(bool);
 	bool loadSpriteTexture(char* filename, int num_frames = 1);
+	void ChooseNewGoal(Vector2D* newGoal);
 	void ChooseNewGoal(std::vector<Vector2D*> coins);
 	bool isInVersusScene = false;
 

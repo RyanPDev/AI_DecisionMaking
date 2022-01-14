@@ -1,11 +1,11 @@
-#include "Agent.h"
-#include "ModifiedAStar.h"
-#include "utils.h"
 #include <iostream>
-
+#include "Agent.h"
+#include "utils.h"
+#include "FSM.h"
+#include "SDL_SimpleApp.h"
 using namespace std;
 
-Agent::Agent(Graph _graph, bool _isInVersusScene, Scene* Scene) : sprite_texture(0),
+Agent::Agent(Graph _graph, bool _isInVersusScene, Scene* _scene, bool _implementsSensorySystem) : sprite_texture(0),
 position(Vector2D(100, 100)),
 target(Vector2D(1000, 100)),
 velocity(Vector2D(0, 0)),
@@ -18,10 +18,13 @@ sprite_num_frames(0),
 sprite_w(0),
 sprite_h(0),
 draw_sprite(false),
+hasSensorySystem(_implementsSensorySystem),
 isInVersusScene(_isInVersusScene)
 {
 		blackBoard = new Blackboard(_graph);
 		pathfinding = new ModifiedAStar();
+		sensors = new SensorySystem(_scene);
+		brain = new FSM();
 }
 
 Agent::~Agent()
@@ -35,6 +38,16 @@ Agent::~Agent()
 void Agent::setBehavior(SteeringBehavior* behavior)
 {
 	steering_behaviour = behavior;
+}
+void Agent::ReplaceWanderPosition()
+{
+	// set the coin in a random cell (but at least 3 cells far from the agent)
+	int num_cell_x = SRC_WIDTH / CELL_SIZE;
+	int num_cell_y = SRC_HEIGHT / CELL_SIZE;
+	do{
+		currentGoal = &Vector2D((float)(rand() % num_cell_x), (float)(rand() % num_cell_y));
+	} while (!blackBoard->graph.nodes[currentGoal->x][currentGoal->y]->isValid || (Vector2D::Distance(*currentGoal, pix2cell(getPosition())) < 3));
+	
 }
 
 Vector2D Agent::getPosition()
@@ -93,6 +106,10 @@ void Agent::update(float dtime, SDL_Event* event)
 	default:
 		break;
 	}
+	if(hasSensorySystem)
+		sensors->Update(this,dtime);
+
+	//brain->Update(this, dtime);
 
 	// Apply the steering behavior
 	steering_behaviour->applySteeringForce(this, dtime);
@@ -143,6 +160,31 @@ void Agent::setCurrentTargetIndex(int idx)
 	currentTargetIndex = idx;
 }
 
+void Agent::ChooseNewGoal()
+{
+	ReplaceWanderPosition();
+	Vector2D start;
+	if (currentTargetIndex >= 0)
+		start = getPathPoint(currentTargetIndex);
+	else
+		start = position;
+
+	clearPath();
+	pathfinding->CalculatePath(blackBoard->graph, path, start, *currentGoal);
+}
+
+void Agent::ChooseNewGoal(Vector2D* newGoal)
+{
+	currentGoal = newGoal;
+	Vector2D start;
+	if (currentTargetIndex >= 0)
+		start = getPathPoint(currentTargetIndex);
+	else
+		start = position;
+
+	clearPath();
+	pathfinding->CalculatePath(blackBoard->graph, path, start, *currentGoal);
+}
 void Agent::ChooseNewGoal(std::vector<Vector2D*> coins)
 {
 	float auxDistance = 100000000;

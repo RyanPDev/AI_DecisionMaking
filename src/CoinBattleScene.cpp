@@ -3,6 +3,7 @@
 #include "utils.h"
 #include <iostream>
 
+
 using namespace std;
 
 CoinBattleScene::CoinBattleScene()
@@ -15,25 +16,19 @@ CoinBattleScene::CoinBattleScene()
 	loadTextures("../res/maze.png", "../res/coin.png");
 	srand((unsigned int)time(NULL));
 
+	player = new Agent(graph, true, this);
+	player->loadSpriteTexture("../res/soldier.png", 4);
+	player->setBehavior(new PathFollowing);
+	player->setTarget(Vector2D(-20, -20));
+	player->ReplaceWanderPosition();
 	for (int i = 0; i < NUM_AGENTS; i++)
 	{
-		Agent* agent = new Agent(graph, true,this);
+		Agent* agent = new Agent(graph, true,this,true);
 		agent->loadSpriteTexture("../res/soldier.png", 4);
 		agent->setBehavior(new PathFollowing);
 		agent->setTarget(Vector2D(-20, -20));
+		agent->ReplaceWanderPosition();
 		agents.push_back(agent);
-	}
-
-	for (int i = 0; i < MAX_COINS; i++)
-	{
-		Vector2D* c = new Vector2D;
-
-		coinsPosition.push_back(c);
-	}
-
-	for (Vector2D* c : coinsPosition)
-	{
-		ReplaceCoinPosition(*c);
 	}
 
 	Vector2D rand_cell(-1, -1);
@@ -47,7 +42,6 @@ CoinBattleScene::CoinBattleScene()
 
 		// set agent position coords to the center of a random cell
 		a->setPosition(cell2pix(rand_cell));
-		a->ChooseNewGoal(coinsPosition);
 	}
 }
 
@@ -73,66 +67,40 @@ void CoinBattleScene::update(float dtime, SDL_Event* event)
 			draw_grid = !draw_grid;
 		if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 			drawPaths = !drawPaths;
+		if (event->key.keysym.scancode == SDL_SCANCODE_P)
+		{
+			player->blackBoard->SetPlayerHasGun(!player->blackBoard->GetPlayerHasGun());
+			std::cout << "Player has a weapon = " << player->blackBoard->GetPlayerHasGun() << std::endl;
+		}
+
 		break;
 	case SDL_MOUSEMOTION:
 	case SDL_MOUSEBUTTONDOWN:
+		if (event->button.button == SDL_BUTTON_LEFT)
+		{
+			Vector2D cell = pix2cell(Vector2D((float)(event->button.x), (float)(event->button.y)));
+			if (maze->isValidCell(cell)) {
+				player->ChooseNewGoal(&cell);
+			}
+		}
 		break;
 	default:
 		break;
 	}
-
-	//Checks distance between agents. If they're close enough, start modifiying weights around them so they can evade each other
-	if (CalculateDistance(agents[0]->getPosition(), agents[1]->getPosition()) < evasiveDistance)
-	{
-		agents[0]->blackBoard->graph.ResetAllWeights(maze->terrain);
-		agents[0]->blackBoard->graph.ChangeWeights(agents[1]->getPosition(), 100000, 20000, 10000);
-		agents[0]->ChooseNewGoal(coinsPosition);
-
-		agents[1]->blackBoard->graph.ResetAllWeights(maze->terrain);
-		agents[1]->blackBoard->graph.ChangeWeights(agents[0]->getPosition(), 100000, 20000, 10000);
-		agents[1]->ChooseNewGoal(coinsPosition);
-	}
-
+	player->update(dtime,event);
+	
 	for (Agent* a : agents)
 	{
 		a->update(dtime, event);
-
-
-		if (pix2cell(a->getPosition()) == *a->currentGoal)
-		{
-			count++;
-			for (Vector2D* c : coinsPosition)
-			{
-				if (a->currentGoal == c)
-				{
-					ReplaceCoinPosition(*c);
-					break;
-				}
-			}
-			for (Agent* a_ : agents)
-			{
-				a_->blackBoard->graph.ResetAllWeights(maze->terrain);
-				a_->ChooseNewGoal(coinsPosition);
-			}
-		}
 	}
 }
 
-void CoinBattleScene::ReplaceCoinPosition(Vector2D& coinPosition)
-{
-	coinPosition = Vector2D(-1, -1);
-	// set the coin in a random cell (but at least 3 cells far from the agent)
 
-	while ((!maze->isValidCell(coinPosition)) || (Vector2D::Distance(coinPosition, pix2cell(agents[0]->getPosition())) < 3))
-	{
-		coinPosition = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
-	}
-}
 
 void CoinBattleScene::draw()
 {
 	drawMaze();
-	drawCoin();
+	//	drawCoin();
 
 	if (draw_grid)
 	{
@@ -146,10 +114,10 @@ void CoinBattleScene::draw()
 			SDL_RenderDrawLine(TheApp::Instance()->getRenderer(), 0, j, SRC_WIDTH, j);
 		}
 	}
-
+	player->draw(drawPaths);
 	for (Agent* a : agents)
 	{
-		a->draw(drawPaths); //We pass bool as a parameter to set visibility of paths to true or false with input from user
+		a->draw(drawPaths); 
 	}
 }
 
@@ -178,16 +146,7 @@ void CoinBattleScene::drawMaze()
 	}
 }
 
-void CoinBattleScene::drawCoin()
-{
-	for (Vector2D* c : coinsPosition)
-	{
-		Vector2D coin_coords = cell2pix(*c);
-		int offset = CELL_SIZE / 2;
-		SDL_Rect dstrect = { (int)coin_coords.x - offset, (int)coin_coords.y - offset, CELL_SIZE, CELL_SIZE };
-		SDL_RenderCopy(TheApp::Instance()->getRenderer(), coin_texture, NULL, &dstrect);
-	}
-}
+
 
 bool CoinBattleScene::loadTextures(char* filename_bg, char* filename_coin)
 {
