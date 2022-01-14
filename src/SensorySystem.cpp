@@ -1,6 +1,5 @@
 #include "SensorySystem.h"
 #include "Scene.h"
-#include "Agent.h"
 
 SensorySystem::SensorySystem(Scene* _scene): scene(_scene)
 {

@@ -43,7 +43,6 @@ CoinBattleScene::CoinBattleScene()
 		while (!maze->isValidCell(rand_cell))
 			rand_cell = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
 
-		//std::cout << "Instancia " << count << ":" << std::endl;
 		count++;
 
 		// set agent position coords to the center of a random cell
@@ -101,7 +100,6 @@ void CoinBattleScene::update(float dtime, SDL_Event* event)
 
 		if (pix2cell(a->getPosition()) == *a->currentGoal)
 		{
-			//std::cout << "Instancia " << count << ":" << std::endl;
 			count++;
 			for (Vector2D* c : coinsPosition)
 			{
@@ -175,9 +173,6 @@ void CoinBattleScene::drawMaze()
 				coords = cell2pix(Vector2D((float)i, (float)j)) - Vector2D((float)CELL_SIZE / 2, (float)CELL_SIZE / 2);
 				rect = { (int)coords.x, (int)coords.y, CELL_SIZE, CELL_SIZE };
 				SDL_RenderFillRect(TheApp::Instance()->getRenderer(), &rect);
-			}
-			else {
-				// Do not draw if it is not necessary (bg is already black)
 			}
 		}
 	}

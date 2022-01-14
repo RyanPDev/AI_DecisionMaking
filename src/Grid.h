@@ -6,7 +6,6 @@
 #include <time.h>
 #include "Vector2D.h"
 
-
 class Grid
 {
 public:
@@ -16,7 +15,6 @@ public:
 private:
 	int num_cell_x;
 	int num_cell_y;
-
 
 public:
 	

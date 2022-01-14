@@ -60,7 +60,6 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 			}
 		}
 	}
-	//std::cout << "Numero de nodes explorats: " << count << std::endl;
 }
 
 void ModifiedAStar::Clear(std::priority_queue<Graph::Node*, std::vector<Graph::Node*>, ComparePriority>& q, Graph graph)

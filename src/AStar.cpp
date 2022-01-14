@@ -45,7 +45,6 @@ void Astar::CalculatePath(Graph graph, Path& path, Vector2D start, Vector2D goal
 			}
 		}
 	}
-	//std::cout << "Numero de nodes afegits a la frontera: " << count << std::endl;
 }
 
 void Astar::Clear(std::priority_queue<Graph::Node*, std::vector<Graph::Node*>, ComparePriority>& q, Graph graph)

@@ -1,9 +1,6 @@
 #pragma once
-//#include <iostream>
-//#include <SDL.h>
 #include <SDL_image.h>
 #include "Vector2D.h"
-
 
 #define SRC_WIDTH 1280
 #define SRC_HEIGHT 768
@@ -24,7 +21,6 @@ private:
 	int win_width;
 	int win_height;
 	int grid_cell_size;
-	SDL_Color bg_color;
 	bool win_fullscreen;
 	float last_update;
 

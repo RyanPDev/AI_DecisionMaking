@@ -1,6 +1,6 @@
 #pragma once
-#include "Scene.h" //--> ojo, dos includes vector
-#include "Grid.h" //--> ojo, dos includes vector
+#include "Scene.h"
+#include "Grid.h"
 
 class AlgorithmsScene :
 	public Scene

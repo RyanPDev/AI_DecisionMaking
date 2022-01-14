@@ -23,7 +23,6 @@ private:
 	Graph graph; //--> GOES TO BLACKBOARD
 	bool draw_grid;
 	int count = 1;
-	//std::vector<Agent*> agents;
 	//Agent player;
 	const int NUM_AGENTS = 2;
 	const int MAX_COINS = 5;
