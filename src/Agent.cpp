@@ -33,8 +33,14 @@ Agent::~Agent()
 {
 	if (sprite_texture)
 		SDL_DestroyTexture(sprite_texture);
+
 	if (steering_behaviour)
-		delete (steering_behaviour);
+		delete steering_behaviour;
+
+	delete blackBoard;
+	delete pathfinding;
+	delete sensors;
+	delete brain;
 }
 
 void Agent::setBehavior(SteeringBehavior* behavior)

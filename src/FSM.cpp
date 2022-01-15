@@ -10,6 +10,7 @@ void FSM::ChangeState(IFSMState* newState, Agent* agent, float dtime)
 
 void FSM::Update(Agent* _agent, float dtime)
 {
-	//currentState->Update(_agent, dtime);
+	/*IFSMState* state = currentState->Update(_agent, dtime);
+	if (state != nullptr) ChangeState(state, _agent, dtime);*/
 	_agent->draw(true);
 }

@@ -51,10 +51,8 @@ CoinBattleScene::~CoinBattleScene()
 	if (coin_texture)
 		SDL_DestroyTexture(coin_texture);
 
-	for (int i = 0; i < (int)agents.size(); i++)
-	{
-		delete agents[i];
-	}
+	delete maze;
+	maze = nullptr;
 }
 
 void CoinBattleScene::update(float dtime, SDL_Event* event)

@@ -43,11 +43,6 @@ AlgorithmsScene::~AlgorithmsScene()
 		SDL_DestroyTexture(background_texture);
 	if (coin_texture)
 		SDL_DestroyTexture(coin_texture);
-
-	for (int i = 0; i < (int)agents.size(); i++)
-	{
-		delete agents[i];
-	}
 }
 
 void AlgorithmsScene::update(float dtime, SDL_Event* event)
