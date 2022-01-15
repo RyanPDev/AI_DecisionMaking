@@ -1,12 +1,15 @@
 #pragma once
 #include "DecisionMakingAlgorithm.h"
+#include "IFSMState.h"
+
 class FSM :
-    public DecisionMakingAlgorithm
+	public DecisionMakingAlgorithm
 {
 private:
-public:
-    FSM();
-    ~FSM();
-   void Update(Agent*,float);
-};
+	IFSMState* currentState;
 
+	void ChangeState(IFSMState*, Agent*, float);
+
+public:
+	void Update(Agent*, float);
+};

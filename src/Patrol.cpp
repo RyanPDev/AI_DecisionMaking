@@ -1,16 +1,9 @@
-#include "FSMState_Patrol.h"
+#include "Patrol.h"
 #include "Agent.h"
 #include "utils.h"
 #include "Scene.h"
-FSMState_Patrol::FSMState_Patrol()
-{
-}
 
-FSMState_Patrol::~FSMState_Patrol()
-{
-}
-
-FSMState* FSMState_Patrol::Update(Agent* agent, float dtime)
+IFSMState* Patrol::Update(Agent* agent, float dtime)
 {
 	//Checks distance between agents. If they're close enough, start modifiying weights around them so they can evade each other
 	int i = 0;
@@ -34,13 +27,13 @@ FSMState* FSMState_Patrol::Update(Agent* agent, float dtime)
 	return nullptr;
 }
 
-void FSMState_Patrol::Enter(Agent* agent, float dtime)
+void Patrol::Enter(Agent* agent, float dtime)
 {
 	agent->ChooseNewGoal();
 	agent->blackBoard->graph.ResetAllWeights();
 
 }
 
-void FSMState_Patrol::Exit(Agent*, float)
+void Patrol::Exit(Agent*, float)
 {
 }

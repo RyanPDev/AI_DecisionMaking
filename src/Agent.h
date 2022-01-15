@@ -2,7 +2,6 @@
 #include "Pathfinding.h"
 #include "SensorySystem.h"
 #include "Blackboard.h"
-#include "ModifiedAStar.h"
 #include "DecisionMakingAlgorithm.h"
 
 class Scene;
@@ -29,7 +28,6 @@ private:
 	DecisionMakingAlgorithm* brain;
 
 	Vector2D* wanderPosition;
-	// Pathfinding
 	int currentTargetIndex;
 
 	float mass;

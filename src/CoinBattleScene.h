@@ -1,9 +1,4 @@
 #pragma once
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <time.h>
 #include "Grid.h"
 #include "Graph.h"
 #include "Scene.h"
@@ -23,13 +18,11 @@ private:
 	Graph graph; //--> GOES TO BLACKBOARD
 	bool draw_grid;
 	int count = 1;
-	//Agent player;
+
 	const int NUM_AGENTS = 2;
 	const int MAX_COINS = 5;
 
-
 	void drawMaze();
-	void drawCoin();
 	SDL_Texture* background_texture;
 	SDL_Texture* coin_texture;
 	bool loadTextures(char* filename_bg, char* filename_coin);

@@ -57,22 +57,16 @@
     <ClCompile Include="..\src\SensorySystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\DecisionMakingAlgorithm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\FSM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\FSMState.cpp">
+    <ClCompile Include="..\src\Patrol.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\FSMState_Patrol.cpp">
+    <ClCompile Include="..\src\Chase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\FSMState_Chase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\FSMState_Evade.cpp">
+    <ClCompile Include="..\src\Evade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,16 +125,16 @@
     <ClInclude Include="..\src\FSM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\FSMState.h">
+    <ClInclude Include="..\src\IFSMState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\FSMState_Patrol.h">
+    <ClInclude Include="..\src\Patrol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\FSMState_Chase.h">
+    <ClInclude Include="..\src\Chase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\FSMState_Evade.h">
+    <ClInclude Include="..\src\Evade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

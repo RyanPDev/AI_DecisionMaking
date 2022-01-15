@@ -13,7 +13,6 @@ public:
 	const char* getTitle();
 
 private:
-	//std::vector<Agent*> agents;
 	Vector2D coinPosition;
 	void ReplaceCoinPosition();
 	Grid* maze;

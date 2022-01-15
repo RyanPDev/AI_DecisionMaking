@@ -3,7 +3,6 @@
 #include "utils.h"
 #include <iostream>
 
-
 using namespace std;
 
 CoinBattleScene::CoinBattleScene()

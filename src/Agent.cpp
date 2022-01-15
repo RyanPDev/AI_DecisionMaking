@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "FSM.h"
 #include "SDL_SimpleApp.h"
+#include "ModifiedAStar.h"
+
 using namespace std;
 
 Agent::Agent(Graph _graph, bool _isInVersusScene, Scene* _scene, bool _implementsSensorySystem) : sprite_texture(0),
@@ -46,7 +48,7 @@ void Agent::ReplaceWanderPosition()
 	int num_cell_y = SRC_HEIGHT / CELL_SIZE;
 	do{
 		currentGoal = &Vector2D((float)(rand() % num_cell_x), (float)(rand() % num_cell_y));
-	} while (!blackBoard->graph.nodes[currentGoal->x][currentGoal->y]->isValid || (Vector2D::Distance(*currentGoal, pix2cell(getPosition())) < 3));
+	} while (!blackBoard->graph.nodes[currentGoal->y][currentGoal->x]->isValid || (Vector2D::Distance(*currentGoal, pix2cell(getPosition())) < 3));
 	
 }
 

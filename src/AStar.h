@@ -1,6 +1,7 @@
 #pragma once
 #include "Pathfinding.h"
 #include <queue>
+
 class Astar :
     public Pathfinding
 {
@@ -20,4 +21,3 @@ public:
 	void CalculatePath(Graph, Path&, Vector2D, Vector2D);
 	void Clear(std::priority_queue < Graph::Node*, std::vector<Graph::Node*>, ComparePriority >& q, Graph graph);
 };
-
