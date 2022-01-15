@@ -8,7 +8,7 @@ private:
 	float seeDistance; // also for cone
 	float coneHalfAngle;
 	bool playerInSight,playerHasGun;
-	const float evasiveDistance = 64;
+	const float evasiveDistance = 110;
 
 public:
 	Blackboard(Graph);

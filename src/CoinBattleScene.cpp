@@ -2,7 +2,7 @@
 #include "PathFollowing.h"
 #include "utils.h"
 #include <iostream>
-
+#include <string>
 using namespace std;
 
 CoinBattleScene::CoinBattleScene()
@@ -22,8 +22,10 @@ CoinBattleScene::CoinBattleScene()
 	player->ReplaceWanderPosition();
 	for (int i = 0; i < NUM_AGENTS; i++)
 	{
+		std::string zombiePath = "../res/zombie" + std::to_string(i+1) + ".png";
+
 		Agent* agent = new Agent(graph, true,this,true);
-		agent->loadSpriteTexture("../res/soldier.png", 4);
+		agent->loadSpriteTexture((char*)zombiePath.c_str(), 8);
 		agent->setBehavior(new PathFollowing);
 		agent->setTarget(Vector2D(-20, -20));
 		agent->ReplaceWanderPosition();
@@ -37,10 +39,9 @@ CoinBattleScene::CoinBattleScene()
 		while (!maze->isValidCell(rand_cell))
 			rand_cell = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
 
-		count++;
-
 		// set agent position coords to the center of a random cell
 		a->setPosition(cell2pix(rand_cell));
+		a->ChooseNewGoal();
 	}
 }
 
@@ -76,7 +77,7 @@ void CoinBattleScene::update(float dtime, SDL_Event* event)
 		{
 			Vector2D cell = pix2cell(Vector2D((float)(event->button.x), (float)(event->button.y)));
 			if (maze->isValidCell(cell)) {
-				player->ChooseNewGoal(&cell);
+				player->ChooseNewGoal(cell);
 			}
 		}
 		break;

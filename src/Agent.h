@@ -24,7 +24,7 @@ public:
 	std::unique_ptr<Blackboard> blackBoard;
 	std::unique_ptr<Pathfinding> pathfinding;
 	std::unique_ptr<SensorySystem> sensors;
-	Vector2D* currentGoal;
+	Vector2D currentGoal;
 	Path path;
 
 	void ReplaceWanderPosition();
@@ -44,8 +44,7 @@ public:
 	void update(float dtime, SDL_Event* event);
 	void draw(bool);
 	bool loadSpriteTexture(char* filename, int num_frames = 1);
-	void ChooseNewGoal(Vector2D* newGoal);
-	void ChooseNewGoal(std::vector<Vector2D*> coins);
+	void ChooseNewGoal(Vector2D newGoal);
 	bool isInVersusScene = false;
 	Vector2D getPathPoint(int idx);
 	Vector2D getPosition();
@@ -60,7 +59,6 @@ private:
 
 	std::unique_ptr<DecisionMakingAlgorithm> brain;
 
-	Vector2D* wanderPosition;
 	int currentTargetIndex;
 
 	float mass;

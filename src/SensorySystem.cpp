@@ -31,16 +31,6 @@ void SensorySystem::Update(Agent* agent, float dTime)
 			{
 				agent->blackBoard->SetPlayerInSight(true);
 				agent->blackBoard->SetPlayerHasGun(scene->player->blackBoard->GetPlayerHasGun());
-				
-				
-				agent->ChooseNewGoal(&pix2cell(scene->player->getPosition()));
-				
-				
-
-
-
-
-				// CHANGE DESICION MAKING ALGORITHM
 
 			}
 		}

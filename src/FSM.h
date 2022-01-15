@@ -11,5 +11,7 @@ private:
 	void ChangeState(IFSMState*, Agent*, float);
 
 public:
+	FSM(Agent*);
+	~FSM();
 	void Update(Agent*, float);
 };

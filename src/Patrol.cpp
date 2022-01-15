@@ -2,6 +2,7 @@
 #include "Agent.h"
 #include "utils.h"
 #include "Scene.h"
+#include "Chase.h"
 
 IFSMState* Patrol::Update(Agent* agent, float dtime)
 {
@@ -16,22 +17,30 @@ IFSMState* Patrol::Update(Agent* agent, float dtime)
 		agent->ChooseNewGoal();
 	}
 
-	if (pix2cell(agent->getPosition()) == *agent->currentGoal)
+	if (pix2cell(agent->getPosition()) == agent->currentGoal)
 	{
 		agent->ChooseNewGoal();
 		agent->blackBoard->graph.ResetAllWeights();
 
 	}
+	if (agent->blackBoard->GetPlayerInSight())
+	{
+		delete newState;
+		newState = new Chase();
+		return newState;
+	}
+
 	return nullptr;
 }
 
 void Patrol::Enter(Agent* agent, float dtime)
 {
-	agent->ChooseNewGoal();
+
 	agent->blackBoard->graph.ResetAllWeights();
 
 }
 
-void Patrol::Exit(Agent*, float)
+void Patrol::Exit(Agent* agent, float dtime)
 {
+	agent->blackBoard->graph.ResetAllWeights();
 }
