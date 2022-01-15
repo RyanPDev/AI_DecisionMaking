@@ -14,7 +14,7 @@ public:
 	const char* getTitle();
 
 	Grid* maze;
-
+	
 private:
 	Graph graph; //--> GOES TO BLACKBOARD
 	bool draw_grid;

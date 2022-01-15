@@ -39,9 +39,6 @@
     <ClCompile Include="..\src\Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AlgorithmsScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\CoinBattleScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,9 +96,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\AlgorithmsScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\CoinBattleScene.h">

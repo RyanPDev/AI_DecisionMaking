@@ -12,5 +12,6 @@ void FSM::Update(Agent* _agent, float dtime)
 {
 	/*IFSMState* state = currentState->Update(_agent, dtime);
 	if (state != nullptr) ChangeState(state, _agent, dtime);*/
-	_agent->draw(true);
+
+	//_agent->draw(true);
 }

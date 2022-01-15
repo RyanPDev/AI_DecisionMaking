@@ -14,9 +14,8 @@ int main(int argc, char** argv)
 
 	SDL_SimpleApp* app = SDL_SimpleApp::Instance();
 
-	Scene* curr_scene = new AlgorithmsScene;
+	Scene* curr_scene = new CoinBattleScene;
 	app->setWindowTitle(curr_scene->getTitle());
-
 
 	if (argc > 1) {
 		cout << argv[1] << endl;
@@ -32,18 +31,6 @@ int main(int argc, char** argv)
 		switch (event.type)
 		{
 		case SDL_KEYDOWN:
-			if (event.key.keysym.scancode == SDL_SCANCODE_1) // Change to exercice 1
-			{
-				delete(curr_scene);
-				curr_scene = new AlgorithmsScene;
-				app->setWindowTitle(curr_scene->getTitle());
-			}
-			if (event.key.keysym.scancode == SDL_SCANCODE_2) // Change to exercice 2
-			{
-				delete(curr_scene);
-				curr_scene = new CoinBattleScene;
-				app->setWindowTitle(curr_scene->getTitle());
-			}
 			if ((event.key.keysym.scancode == SDL_SCANCODE_Q) || (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)) // quit
 			{
 				quit = true;
@@ -55,6 +42,7 @@ int main(int argc, char** argv)
 			break;
 		case SDL_QUIT:
 			quit = true;
+			delete curr_scene;
 			break;
 		}
 	}

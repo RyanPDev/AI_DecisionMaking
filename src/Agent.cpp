@@ -23,10 +23,10 @@ draw_sprite(false),
 hasSensorySystem(_implementsSensorySystem),
 isInVersusScene(_isInVersusScene)
 {
-		blackBoard = new Blackboard(_graph);
-		pathfinding = new ModifiedAStar();
-		sensors = new SensorySystem(_scene);
-		brain = new FSM();
+	blackBoard = std::unique_ptr<Blackboard>(new Blackboard(_graph));
+	pathfinding = std::unique_ptr<ModifiedAStar>(new ModifiedAStar());
+	sensors = std::unique_ptr<SensorySystem>(new SensorySystem(_scene));
+	brain = std::unique_ptr<FSM>(new FSM());
 }
 
 Agent::~Agent()
@@ -36,11 +36,6 @@ Agent::~Agent()
 
 	if (steering_behaviour)
 		delete steering_behaviour;
-
-	delete blackBoard;
-	delete pathfinding;
-	delete sensors;
-	delete brain;
 }
 
 void Agent::setBehavior(SteeringBehavior* behavior)
@@ -52,10 +47,9 @@ void Agent::ReplaceWanderPosition()
 	// set the coin in a random cell (but at least 3 cells far from the agent)
 	int num_cell_x = SRC_WIDTH / CELL_SIZE;
 	int num_cell_y = SRC_HEIGHT / CELL_SIZE;
-	do{
+	do {
 		currentGoal = &Vector2D((float)(rand() % num_cell_x), (float)(rand() % num_cell_y));
 	} while (!blackBoard->graph.nodes[currentGoal->y][currentGoal->x]->isValid || (Vector2D::Distance(*currentGoal, pix2cell(getPosition())) < 3));
-	
 }
 
 Vector2D Agent::getPosition()
@@ -114,10 +108,10 @@ void Agent::update(float dtime, SDL_Event* event)
 	default:
 		break;
 	}
-	if(hasSensorySystem)
-		sensors->Update(this,dtime);
+	if (hasSensorySystem)
+		sensors->Update(this, dtime);
 
-	//brain->Update(this, dtime);
+	brain->Update(this, dtime);
 
 	// Apply the steering behavior
 	steering_behaviour->applySteeringForce(this, dtime);

@@ -3,6 +3,7 @@
 #include "SensorySystem.h"
 #include "Blackboard.h"
 #include "DecisionMakingAlgorithm.h"
+#include <memory>
 
 class Scene;
 
@@ -15,17 +16,49 @@ public:
 		SteeringBehavior() {};
 		virtual ~SteeringBehavior() {};
 		virtual void applySteeringForce(Agent* agent, float dtime) {};
-	};
-	Pathfinding* pathfinding;
+	};	
+
+	Agent(Graph, bool, Scene*, bool _hasSensorySystem = false);
+	~Agent();
+
+	std::unique_ptr<Blackboard> blackBoard;
+	std::unique_ptr<Pathfinding> pathfinding;
+	std::unique_ptr<SensorySystem> sensors;
 	Vector2D* currentGoal;
-	SensorySystem *sensors;
+	Path path;
+
+	void ReplaceWanderPosition();
+	float getMaxVelocity();
+	float getMaxForce();
+	float getMass();
+	void setBehavior(SteeringBehavior* behavior);
+	void setPosition(Vector2D position);
+	void setTarget(Vector2D target);
+	void setVelocity(Vector2D velocity);
+	void addPathPoint(Vector2D point);
+	void setCurrentTargetIndex(int idx);
+	void ChooseNewGoal();
+	int getCurrentTargetIndex();
+	int getPathSize();
+	void clearPath();
+	void update(float dtime, SDL_Event* event);
+	void draw(bool);
+	bool loadSpriteTexture(char* filename, int num_frames = 1);
+	void ChooseNewGoal(Vector2D* newGoal);
+	void ChooseNewGoal(std::vector<Vector2D*> coins);
+	bool isInVersusScene = false;
+	Vector2D getPathPoint(int idx);
+	Vector2D getPosition();
+	Vector2D getTarget();
+	Vector2D getVelocity();
 
 private:
 	SteeringBehavior* steering_behaviour;
 	Vector2D velocity;
 	Vector2D target;
 	bool hasSensorySystem;
-	DecisionMakingAlgorithm* brain;
+
+	std::unique_ptr<DecisionMakingAlgorithm> brain;
 
 	Vector2D* wanderPosition;
 	int currentTargetIndex;
@@ -47,35 +80,4 @@ private:
 	}
 
 	Vector2D position;
-public:
-	Agent(Graph,bool, Scene*, bool _hasSensorySystem = false);
-	~Agent();
-	Vector2D getPosition();
-	Vector2D getTarget();
-	Vector2D getVelocity();
-	Blackboard* blackBoard;
-	void ReplaceWanderPosition();
-	Path path;
-
-	float getMaxVelocity();
-	float getMaxForce();
-	float getMass();
-	void setBehavior(SteeringBehavior* behavior);
-	void setPosition(Vector2D position);
-	void setTarget(Vector2D target);
-	void setVelocity(Vector2D velocity);
-	void addPathPoint(Vector2D point);
-	void setCurrentTargetIndex(int idx);
-	void ChooseNewGoal();
-	int getCurrentTargetIndex();
-	int getPathSize();
-	Vector2D getPathPoint(int idx);
-	void clearPath();
-	void update(float dtime, SDL_Event* event);
-	void draw(bool);
-	bool loadSpriteTexture(char* filename, int num_frames = 1);
-	void ChooseNewGoal(Vector2D* newGoal);
-	void ChooseNewGoal(std::vector<Vector2D*> coins);
-	bool isInVersusScene = false;
-
 };

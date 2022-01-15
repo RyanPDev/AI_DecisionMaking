@@ -63,7 +63,7 @@ void AlgorithmsScene::update(float dtime, SDL_Event* event)
 		break;
 	}
 
-	for (Agent* a : agents)
+	for (auto a : agents)
 	{
 		a->update(dtime, event);
 		// if we have arrived to the coin, replace it in a random cell!
