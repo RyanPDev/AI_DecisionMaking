@@ -19,14 +19,13 @@ void SensorySystem::Update(Agent* agent, float dTime)
 			if (LineTrace(agent)) // Calculate if there is no wall between the scene player and agent
 			{
 				agent->blackBoard->SetPlayerInSight(true);
-				agent->blackBoard->SetPlayerHasGun(scene->player->blackBoard->GetPlayerHasGun());
-				//return;
+				// When the agent sees the player it checks if it has a gun
+				agent->blackBoard->SetPlayerHasGun(scene->player->blackBoard->GetPlayerHasGun()); 
 			}
 		}
 	}
 	else
 	{
-		// If there is no line trace conection, enemies don't see the player
 		agent->blackBoard->SetPlayerInSight(false);
 	}
 }
@@ -36,7 +35,7 @@ void SensorySystem::Update(Agent* agent, float dTime)
 bool SensorySystem::LineTrace(Agent* agent) // Checks if can see the player
 {
 	Vector2D currentNode = Vector2D::pix2cell(agent->getPosition());
-	while (Vector2D::pix2cell(scene->player->getPosition()) != currentNode) {
+	while (Vector2D::pix2cell(scene->player->getPosition()) != currentNode) { // finds a straight "path" until it hits a wall or the player
 		if (agent->blackBoard->graph.nodes[currentNode.y][currentNode.x]->isValid)
 		{
 			float directionX = Vector2D::pix2cell(scene->player->getPosition()).x - currentNode.x;

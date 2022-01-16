@@ -9,7 +9,6 @@ private:
 
 public:
 	SensorySystem(Scene*);
-
 	void Update(Agent* agent, float dTime);
 	Scene* scene;
 };

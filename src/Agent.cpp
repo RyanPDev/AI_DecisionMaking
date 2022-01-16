@@ -56,7 +56,7 @@ void Agent::ReplaceWanderPosition()
 
 	do {
 		currentGoal = Vector2D((float)(rand() % num_cell_x), (float)(rand() % num_cell_y));
-	} while (!blackBoard->graph.nodes[currentGoal.y][currentGoal.x]->isValid || (Vector2D::Distance(currentGoal, Vector2D::pix2cell(getPosition())) < 3));	
+	} while (!blackBoard->graph.nodes[currentGoal.y][currentGoal.x]->isValid || (Vector2D::Distance(currentGoal, Vector2D::pix2cell(getPosition())) < 3));
 }
 
 Vector2D Agent::getPosition()
@@ -119,7 +119,7 @@ void Agent::update(float dtime, SDL_Event* event)
 	default:
 		break;
 	}
-	if (hasSensorySystem)
+	if (hasSensorySystem) // this will not happen with the player
 	{
 		sensors->Update(this, dtime);
 		brain->Update(this, dtime);
@@ -186,7 +186,7 @@ void Agent::RecalculatePath()
 	pathfinding->CalculatePath(blackBoard->graph, path, start, currentGoal);
 }
 
-void Agent::ChooseNewGoal()
+void Agent::ChooseNewGoal() // Updates current goal to a random valid goal
 {
 	ReplaceWanderPosition();
 	Vector2D start;
@@ -199,7 +199,7 @@ void Agent::ChooseNewGoal()
 	pathfinding->CalculatePath(blackBoard->graph, path, start, currentGoal);
 }
 
-void Agent::ChooseNewGoal(Vector2D newGoal)
+void Agent::ChooseNewGoal(Vector2D newGoal) // Updates current goal to specific location
 {
 	currentGoal = newGoal;
 	Vector2D start;

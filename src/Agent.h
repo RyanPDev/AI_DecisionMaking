@@ -9,10 +9,6 @@ class Scene;
 
 class Agent
 {
-private:
-	
-	
-
 public:
 	class SteeringBehavior
 	{

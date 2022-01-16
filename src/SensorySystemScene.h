@@ -9,23 +9,23 @@ class SensorySystemScene :
 public:
 	SensorySystemScene();
 	~SensorySystemScene();
+	Grid* maze;
+
+	void ReplaceGunPosition();
 	void update(float dtime, SDL_Event* event);
 	void draw();
+	void DrawGun(bool playerHasIt);
 	const char* getTitle();
-
-	Grid* maze;
 	
 private:
+	const int NUM_AGENTS = 2;
+	bool draw_grid;
 	Graph enemyGraph;
 	Graph playerGraph;
-	bool draw_grid;
-	int count = 1;
-
-	const int NUM_AGENTS = 2;
-	const int MAX_COINS = 5;
+	Vector2D gunPosition;
+	SDL_Texture* background_texture;
+	SDL_Texture* gun_texture;
 
 	void drawMaze();
-	SDL_Texture* background_texture;
-	SDL_Texture* coin_texture;
-	bool loadTextures(char* filename_bg, char* filename_coin);
+	bool loadTextures(char* filename_bg, char* filename_gun);
 };

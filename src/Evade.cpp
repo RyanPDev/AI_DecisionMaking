@@ -7,12 +7,15 @@
 IFSMState* Evade::Update(Agent* agent, float dtime)
 {
 	timer -= dtime;
-
-	//UPDATE GOAL WHILE BEING CHASED
-	if (Vector2D::Distance(agent->currentGoal, Vector2D::pix2cell(agent->getPosition())) < 150 ||
-		Vector2D::Distance(agent->sensors->scene->player->getPosition(), agent->getPosition()) < agent->blackBoard->GetSeeDistance() * 0.6)
+	// If close to current goal, choose another one
+	if (Vector2D::Distance(agent->currentGoal, Vector2D::pix2cell(agent->getPosition())) < 3)
 	{
 		ChooseNewGoal(agent);
+	}
+	//UPDATE WEIGHT WHILE BEING CHASED
+	if (Vector2D::Distance(agent->sensors->scene->player->getPosition(), agent->getPosition()) < agent->blackBoard->GetSeeDistance() * 0.6)
+	{
+		EvadePlayer(agent);
 	}
 
 	if (timer <= 0)
@@ -73,8 +76,15 @@ void Evade::ChooseNewGoal(Agent* agent) // Checks if the new goal is not behind 
 		agent->ChooseNewGoal(); //--> Chooses random new Goal if within 30 tries cannot find a better one
 	}
 }
+void Evade::EvadePlayer(Agent* agent)
+{
+	agent->blackBoard->graph.ResetAllWeights();
+	agent->blackBoard->graph.ChangeWeights(agent->sensors->scene->player->getPosition(), 100000, 20000, 10000);
+	agent->RecalculatePath();
+}
 
 void Evade::Exit(Agent* agent, float dtime)
 {
 	agent->setMaxVelocity(180); //Reset to default speed after evading successfully
+	agent->blackBoard->graph.ResetAllWeights();
 }

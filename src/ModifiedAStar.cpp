@@ -3,7 +3,6 @@
 void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vector2D goal)
 {
 	float newCost = 0;
-	count = 1;
 	start = Vector2D::pix2cell(start);
 
 	//AVOIDS AGENTS GETTING STUCK IN WALLS (NOT VALID POSITIONS IN THE GRAPH)
@@ -39,7 +38,6 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 			newCost = current->costSoFar + next->weight;
 			if (next->cameFrom == nullptr || newCost < next->costSoFar)
 			{
-				count++;
 				next->costSoFar = newCost;
 				if (next->heuristic == 0)
 					next->heuristic = Heuristic(Vector2D::pix2cell(next->position), goal);

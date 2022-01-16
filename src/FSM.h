@@ -7,7 +7,6 @@ class FSM :
 {
 private:
 	IFSMState* currentState;
-
 	void ChangeState(IFSMState*, Agent*, float);
 
 public:

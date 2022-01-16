@@ -10,10 +10,8 @@ IFSMState* Patrol::Update(Agent* agent, float dtime)
 
 	//Checks distance between agents. If they're close enough, start modifiying weights around them so they AVOID each other
 	if (Vector2D::Distance(agent->getPosition(), agent->sensors->scene->agents[i]->getPosition()) < agent->blackBoard->GetEvasiveDistance())
-	{		
-		agent->blackBoard->graph.ResetAllWeights();
-		agent->blackBoard->graph.ChangeWeights(agent->sensors->scene->agents[i]->getPosition(), 100000, 20000, 10000);
-		ChooseNewGoal(agent);
+	{
+		EvadeOtherAgent(agent, i);
 	}
 
 	//IF AGENT REACHES GOAL, UPDATE NEW GOAL POSITION
@@ -47,7 +45,7 @@ void Patrol::ChooseNewGoal(Agent* agent)
 		agent->ReplaceWanderPosition();
 		a = Vector2D::Normalize(agent->currentGoal - Vector2D::pix2cell(agent->getPosition()));
 		counter++;
-	} while (Vector2D::Dot(a, b) < 0 && counter < 30);
+	} while (Vector2D::Dot(a, b) < 0 && counter < 30); 
 
 	agent->RecalculatePath();
 
@@ -65,4 +63,10 @@ void Patrol::Enter(Agent* agent, float dtime)
 void Patrol::Exit(Agent* agent, float dtime)
 {
 	agent->blackBoard->graph.ResetAllWeights();
+}
+void Patrol::EvadeOtherAgent(Agent* agent, int i) // If an agent meets the other, they will not take the path that the other came from
+{
+	agent->blackBoard->graph.ResetAllWeights();
+	agent->blackBoard->graph.ChangeWeights(agent->sensors->scene->agents[i]->getPosition(), 100000, 20000, 10000);
+	agent->RecalculatePath();
 }

@@ -1,6 +1,6 @@
 #include "Pathfinding.h"
 
-Pathfinding::Pathfinding() { count = 1; }
+Pathfinding::Pathfinding() {  }
 Pathfinding::~Pathfinding() {}
 
 //Heuristic calculated that we use --> Diagonal Octile (8 ways)
