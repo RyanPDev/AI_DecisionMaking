@@ -15,7 +15,6 @@ public:
 	~Blackboard();
 	Graph graph;
 
-
 	//SETTERS
 	void SetSeeDistance(float _newSeeDistance) { seeDistance = _newSeeDistance; }
 	void SetConeHalfAngle(float _newConeAngle) { coneHalfAngle = _newConeAngle; }

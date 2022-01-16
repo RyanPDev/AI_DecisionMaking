@@ -20,8 +20,8 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 	{
 		Vector2D aux = goal - start;
 		aux.Normalize();
-		aux.x = trunc(aux.x);
-		aux.y = trunc(aux.y);
+		aux.x = ceil(aux.x);
+		aux.y = ceil(aux.y);
 		start += aux;
 	}
 	Clear(frontier, graph);
@@ -40,7 +40,6 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 		if (pix2cell(current->position) == goal) //early exit
 		{
 			GetPath(path, start, current);
-
 			break;
 		}
 
@@ -71,7 +70,6 @@ void ModifiedAStar::Clear(std::priority_queue<Graph::Node*, std::vector<Graph::N
 			graph.nodes[i][j]->costSoFar = 0;
 			graph.nodes[i][j]->heuristic = 0;
 			graph.nodes[i][j]->priority = 0;
-
 		}
 
 	std::priority_queue < Graph::Node*, std::vector<Graph::Node*>, ComparePriority > empty;

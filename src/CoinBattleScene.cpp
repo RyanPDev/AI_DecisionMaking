@@ -11,20 +11,22 @@ CoinBattleScene::CoinBattleScene()
 	maze = new Grid("../res/maze.csv");
 
 	graph = Graph(maze->terrain);
+	graph2 = Graph(maze->terrain);
 
 	loadTextures("../res/maze.png", "../res/coin.png");
-	srand((unsigned int)time(NULL));
+	srand((unsigned int)time(nullptr));
 
 	player = new Agent(graph, true, this);
 	player->loadSpriteTexture("../res/soldier.png", 4);
 	player->setBehavior(new PathFollowing);
 	player->setTarget(Vector2D(-20, -20));
-	player->ReplaceWanderPosition();
+	//player->ReplaceWanderPosition();
+
 	for (int i = 0; i < NUM_AGENTS; i++)
 	{
 		std::string zombiePath = "../res/zombie" + std::to_string(i+1) + ".png";
 
-		Agent* agent = new Agent(graph, true,this,true);
+		Agent* agent = new Agent(graph2, true,this,true);
 		agent->loadSpriteTexture((char*)zombiePath.c_str(), 8);
 		agent->setBehavior(new PathFollowing);
 		agent->setTarget(Vector2D(-20, -20));

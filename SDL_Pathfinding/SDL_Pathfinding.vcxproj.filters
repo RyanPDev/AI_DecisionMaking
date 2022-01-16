@@ -45,9 +45,6 @@
     <ClCompile Include="..\src\ModifiedAStar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Astar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Blackboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -102,9 +99,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ModifiedAStar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Astar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Blackboard.h">

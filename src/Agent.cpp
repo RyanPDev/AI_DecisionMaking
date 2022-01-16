@@ -23,13 +23,17 @@ draw_sprite(false),
 hasSensorySystem(_implementsSensorySystem),
 isInVersusScene(_isInVersusScene)
 {
-	blackBoard = std::unique_ptr<Blackboard>(new Blackboard(_graph));
-	pathfinding = std::unique_ptr<ModifiedAStar>(new ModifiedAStar());
+	/*blackBoard = std::unique_ptr<Blackboard>(new Blackboard(_graph));
+	pathfinding = std::unique_ptr<ModifiedAStar>(new ModifiedAStar());*/
+	blackBoard = new Blackboard(_graph);
+	pathfinding = new ModifiedAStar();
 	if (hasSensorySystem)
 	{
 		max_velocity = 180;
-		sensors = std::unique_ptr<SensorySystem>(new SensorySystem(_scene));
-		brain = std::unique_ptr<FSM>(new FSM(this));
+		/*sensors = std::unique_ptr<SensorySystem>(new SensorySystem(_scene));
+		brain = std::unique_ptr<FSM>(new FSM(this));*/
+		sensors = new SensorySystem(_scene);
+		brain = new FSM(this);
 	}
 }
 
@@ -40,6 +44,11 @@ Agent::~Agent()
 
 	if (steering_behaviour)
 		delete steering_behaviour;
+
+	delete blackBoard;
+	delete pathfinding;
+	delete sensors;
+	delete brain;
 }
 
 void Agent::setBehavior(SteeringBehavior* behavior)
@@ -101,6 +110,11 @@ void Agent::setTarget(Vector2D _target)
 void Agent::setVelocity(Vector2D _velocity)
 {
 	velocity = _velocity;
+}
+
+void Agent::setMaxVelocity(float newVelocity)
+{
+	max_velocity = newVelocity;
 }
 
 void Agent::update(float dtime, SDL_Event* event)
@@ -167,6 +181,18 @@ void Agent::clearPath()
 void Agent::setCurrentTargetIndex(int idx)
 {
 	currentTargetIndex = idx;
+}
+
+void Agent::RecalculatePath()
+{
+	Vector2D start;
+	if (currentTargetIndex >= 0)
+		start = getPathPoint(currentTargetIndex);
+	else
+		start = position;
+
+	clearPath();
+	pathfinding->CalculatePath(blackBoard->graph, path, start, currentGoal);
 }
 
 void Agent::ChooseNewGoal()

@@ -3,7 +3,7 @@
 Blackboard::Blackboard(Graph _graph): graph(_graph)
 {
 	seeDistance = 200; // also for cone
-	coneHalfAngle = 90;
+	coneHalfAngle = 145;
 	playerInSight = false;
 	playerHasGun = false;
 	

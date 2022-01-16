@@ -8,10 +8,11 @@ IFSMState* Patrol::Update(Agent* agent, float dtime)
 {
 	//Checks distance between agents. If they're close enough, start modifiying weights around them so they can evade each other
 	int i = 0;
-	if (agent->sensors->scene->agents[0] == agent)
-		i = 1;
+	if (agent->sensors->scene->agents[0] == agent) i = 1;
+
 	if (CalculateDistance(agent->getPosition(), agent->sensors->scene->agents[i]->getPosition()) < agent->blackBoard->GetEvasiveDistance())
 	{
+		
 		agent->blackBoard->graph.ResetAllWeights();
 		agent->blackBoard->graph.ChangeWeights(agent->sensors->scene->agents[i]->getPosition(), 100000, 20000, 10000);
 		agent->ChooseNewGoal();
@@ -21,8 +22,8 @@ IFSMState* Patrol::Update(Agent* agent, float dtime)
 	{
 		agent->ChooseNewGoal();
 		agent->blackBoard->graph.ResetAllWeights();
-
 	}
+
 	if (agent->blackBoard->GetPlayerInSight())
 	{
 		delete newState;
@@ -35,9 +36,7 @@ IFSMState* Patrol::Update(Agent* agent, float dtime)
 
 void Patrol::Enter(Agent* agent, float dtime)
 {
-
 	agent->blackBoard->graph.ResetAllWeights();
-
 }
 
 void Patrol::Exit(Agent* agent, float dtime)

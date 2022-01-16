@@ -132,7 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Agent.cpp" />
-    <ClCompile Include="..\src\Astar.cpp" />
     <ClCompile Include="..\src\Blackboard.cpp" />
     <ClCompile Include="..\src\FSM.cpp" />
     <ClCompile Include="..\src\Chase.cpp" />
@@ -151,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Agent.h" />
-    <ClInclude Include="..\src\Astar.h" />
     <ClInclude Include="..\src\Blackboard.h" />
     <ClInclude Include="..\src\DecisionMakingAlgorithm.h" />
     <ClInclude Include="..\src\FSM.h" />

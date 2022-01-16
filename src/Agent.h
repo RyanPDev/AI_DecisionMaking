@@ -16,14 +16,18 @@ public:
 		SteeringBehavior() {};
 		virtual ~SteeringBehavior() {};
 		virtual void applySteeringForce(Agent* agent, float dtime) {};
-	};	
+	};
 
 	Agent(Graph, bool, Scene*, bool _hasSensorySystem = false);
 	~Agent();
 
-	std::unique_ptr<Blackboard> blackBoard;
-	std::unique_ptr<Pathfinding> pathfinding;
-	std::unique_ptr<SensorySystem> sensors;
+	Blackboard* blackBoard;
+	Pathfinding* pathfinding;
+	SensorySystem* sensors;
+
+	//std::unique_ptr<Blackboard> blackBoard;
+	//std::unique_ptr<Pathfinding> pathfinding;
+	//std::unique_ptr<SensorySystem> sensors;
 	Vector2D currentGoal;
 	Path path;
 
@@ -35,8 +39,10 @@ public:
 	void setPosition(Vector2D position);
 	void setTarget(Vector2D target);
 	void setVelocity(Vector2D velocity);
+	void setMaxVelocity(float newVelocity);
 	void addPathPoint(Vector2D point);
 	void setCurrentTargetIndex(int idx);
+	void RecalculatePath();
 	void ChooseNewGoal();
 	int getCurrentTargetIndex();
 	int getPathSize();
@@ -52,12 +58,13 @@ public:
 	Vector2D getVelocity();
 
 private:
+	bool hasSensorySystem;
 	SteeringBehavior* steering_behaviour;
 	Vector2D velocity;
 	Vector2D target;
-	bool hasSensorySystem;
 
-	std::unique_ptr<DecisionMakingAlgorithm> brain;
+	//std::unique_ptr<DecisionMakingAlgorithm> brain;
+	DecisionMakingAlgorithm* brain;
 
 	int currentTargetIndex;
 
@@ -71,11 +78,6 @@ private:
 	int sprite_num_frames;
 	int sprite_w;
 	int sprite_h;
-	Vector2D cell2pix(Vector2D cell)
-	{
-		int offset = CELL_SIZE / 2;
-		return Vector2D(cell.x * CELL_SIZE + offset, cell.y * CELL_SIZE + offset);
-	}
 
 	Vector2D position;
 };

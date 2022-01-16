@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "utils.h"
 #include "SDL_SimpleApp.h"
 
 class Graph
@@ -12,10 +13,6 @@ public:
 	void ChangeWeights(Vector2D position, float, float,float);
 	void AddAllNeighbours();
 
-	Vector2D pix2cell(Vector2D pix)
-	{
-		return Vector2D((float)((int)pix.x / CELL_SIZE), (float)((int)pix.y / CELL_SIZE));
-	}
 	struct Node {
 		Vector2D position;
 		float weight, heuristic, priority;
@@ -46,13 +43,7 @@ public:
 					}
 				}
 			}
-		}
-
-		Vector2D cell2pix(Vector2D cell)
-		{
-			int offset = CELL_SIZE / 2;
-			return Vector2D(cell.x * CELL_SIZE + offset, cell.y * CELL_SIZE + offset);
-		}		
+		}	
 	};
 
 	std::vector<std::vector<Node*>> nodes;	

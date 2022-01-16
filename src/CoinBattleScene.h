@@ -17,6 +17,7 @@ public:
 	
 private:
 	Graph graph; //--> GOES TO BLACKBOARD
+	Graph graph2; //--> GOES TO BLACKBOARD
 	bool draw_grid;
 	int count = 1;
 

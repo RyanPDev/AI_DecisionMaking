@@ -41,6 +41,7 @@ void Graph::ResetAllWeights() // Resets weights to their original state
 		}
 	}
 }
+
 void Graph::ChangeWeights(Vector2D position, float maxValue, float decreaseStrength, float minimumValue) 
 {
 	// Gets the other agent position and then expands recursively changing the vale with a decrease in each iteration untill it reaches a minimum value
@@ -51,7 +52,6 @@ void Graph::ChangeWeights(Vector2D position, float maxValue, float decreaseStren
 		nodes[position.y][position.x]->ChangeWeightRecursive(maxValue,decreaseStrength,minimumValue);
 	}
 }
-
 
 void Graph::AddAllNeighbours()
 {
