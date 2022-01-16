@@ -1,21 +1,12 @@
 #include "ModifiedAStar.h"
-#include "utils.h"
-
-ModifiedAStar::ModifiedAStar()
-{
-
-}
-
-ModifiedAStar::~ModifiedAStar()
-{
-
-}
 
 void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vector2D goal)
 {
 	float newCost = 0;
 	count = 1;
-	start = pix2cell(start);
+	start = Vector2D::pix2cell(start);
+
+	//AVOIDS AGENTS GETTING STUCK IN WALLS (NOT VALID POSITIONS IN THE GRAPH)
 	while (graph.nodes[start.y][start.x] == nullptr || !graph.nodes[start.y][start.x]->isValid)
 	{
 		Vector2D aux = goal - start;
@@ -37,7 +28,7 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 		current = frontier.top();
 		frontier.pop();
 
-		if (pix2cell(current->position) == goal) //early exit
+		if (Vector2D::pix2cell(current->position) == goal) //early exit
 		{
 			GetPath(path, start, current);
 			break;
@@ -51,7 +42,7 @@ void ModifiedAStar::CalculatePath(Graph graph, Path& path, Vector2D start, Vecto
 				count++;
 				next->costSoFar = newCost;
 				if (next->heuristic == 0)
-					next->heuristic = Heuristic(pix2cell(next->position), goal);
+					next->heuristic = Heuristic(Vector2D::pix2cell(next->position), goal);
 
 				next->priority = (newCost * alpha) + (next->heuristic * beta);
 				next->cameFrom = current;

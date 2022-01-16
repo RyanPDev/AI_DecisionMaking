@@ -1,17 +1,17 @@
 #pragma once
 #include <vector>
-#include "utils.h"
 #include "SDL_SimpleApp.h"
 
 class Graph
 {
+private:
+	void AddAllNeighbours();
+
 public:
 	Graph();
 	Graph(std::vector<std::vector<int>>);
-	void ResetAllWeights(std::vector<std::vector<int>>);
 	void ResetAllWeights();
 	void ChangeWeights(Vector2D position, float, float,float);
-	void AddAllNeighbours();
 
 	struct Node {
 		Vector2D position;
@@ -22,7 +22,7 @@ public:
 		bool isValid;
 		Node(Vector2D cellPos, float _weight) : weight(_weight)
 		{
-			position = cell2pix(cellPos);
+			position = Vector2D::cell2pix(cellPos);
 			isValid = weight != 0;
 			cameFrom = nullptr;
 			costSoFar = 0;

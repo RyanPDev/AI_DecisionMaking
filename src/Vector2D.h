@@ -15,6 +15,7 @@
 
 #define RAD2DEG (180.0f / (float)M_PI)
 #define DEG2RAD ((float)M_PI / 180.0f)
+#define CELL_SIZE 32
 
 struct Vector2D
 {
@@ -140,6 +141,17 @@ struct Vector2D
 	{
 		Vector2D v = start - end;
 		return v.LengthSquared();
+	}
+
+	static inline Vector2D pix2cell(Vector2D pix)
+	{
+		return Vector2D((float)((int)pix.x / CELL_SIZE), (float)((int)pix.y / CELL_SIZE));
+	}
+
+	static inline Vector2D cell2pix(Vector2D cell)
+	{
+		int offset = CELL_SIZE / 2;
+		return Vector2D(cell.x * CELL_SIZE + offset, cell.y * CELL_SIZE + offset);
 	}
 };
 

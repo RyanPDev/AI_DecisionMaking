@@ -2,8 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "SDL_SimpleApp.h"
-#include "AlgorithmsScene.h"
-#include "CoinBattleScene.h"
+#include "SensorySystemScene.h"
 
 using namespace std;
 
@@ -14,7 +13,7 @@ int main(int argc, char** argv)
 
 	SDL_SimpleApp* app = SDL_SimpleApp::Instance();
 
-	Scene* curr_scene = new CoinBattleScene;
+	Scene* curr_scene = new SensorySystemScene;
 	app->setWindowTitle(curr_scene->getTitle());
 
 	if (argc > 1) {

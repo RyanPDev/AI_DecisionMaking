@@ -1,25 +1,29 @@
 #include "Chase.h"
 #include "Patrol.h"
 #include "Agent.h"
-#include "utils.h"
 #include "Evade.h"
 #include "Scene.h"
 
 IFSMState* Chase::Update(Agent* agent, float dtime)
 {
 	timer -= dtime;
+
+	//UPDATE PLAYER POSITION TO CHASE EVERY 0.5s INSTEAD OF EVERY FRAME TO SAVE PERFORMANCE
 	if (timer <= 0)
 	{
 		ChooseNewGoal(agent);
 		timer = MAX_TIMER;
-
 	}
+
+	//IF PLAYER NOT IN SIGHT, CHANGE BACK TO PATROL STATE
 	if (!agent->blackBoard->GetPlayerInSight())
 	{
 		delete newState;
 		newState = new Patrol();
 		return newState;
 	}
+
+	//IF WHILE CHASING PLAYER HAS A GUN, CHANGE TO EVADE STATE
 	else if (agent->blackBoard->GetPlayerHasGun())
 	{
 		delete newState;
@@ -43,5 +47,5 @@ void Chase::Exit(Agent* agent, float dtime)
 
 void Chase::ChooseNewGoal(Agent* agent)
 {
-	agent->ChooseNewGoal(pix2cell(agent->sensors->scene->player->getPosition()));
+	agent->ChooseNewGoal(Vector2D::pix2cell(agent->sensors->scene->player->getPosition()));
 }

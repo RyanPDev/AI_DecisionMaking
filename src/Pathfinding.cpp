@@ -1,5 +1,4 @@
 #include "Pathfinding.h"
-#include "utils.h"
 
 Pathfinding::Pathfinding() { count = 1; }
 Pathfinding::~Pathfinding() {}
@@ -18,7 +17,7 @@ void Pathfinding::GetPath(Path& path, Vector2D start, Graph::Node* goal)
 	Graph::Node* current = goal;
 	path.points.push_back(current->position);
 
-	while (pix2cell(current->position) != start)
+	while (Vector2D::pix2cell(current->position) != start)
 	{
 		current = current->cameFrom;
 		path.points.push_back(current->position);

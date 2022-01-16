@@ -1,13 +1,13 @@
 #include <iostream>
 #include "Agent.h"
-#include "utils.h"
 #include "FSM.h"
 #include "SDL_SimpleApp.h"
 #include "ModifiedAStar.h"
+#include "utils.h"
 
 using namespace std;
 
-Agent::Agent(Graph _graph, bool _isInVersusScene, Scene* _scene, bool _implementsSensorySystem) : sprite_texture(0),
+Agent::Agent(Graph _graph, Scene* _scene, bool _implementsSensorySystem) : sprite_texture(0),
 position(Vector2D(100, 100)),
 target(Vector2D(1000, 100)),
 velocity(Vector2D(0, 0)),
@@ -20,20 +20,17 @@ sprite_num_frames(0),
 sprite_w(0),
 sprite_h(0),
 draw_sprite(false),
-hasSensorySystem(_implementsSensorySystem),
-isInVersusScene(_isInVersusScene)
+hasSensorySystem(_implementsSensorySystem)
 {
-	/*blackBoard = std::unique_ptr<Blackboard>(new Blackboard(_graph));
-	pathfinding = std::unique_ptr<ModifiedAStar>(new ModifiedAStar());*/
-	blackBoard = new Blackboard(_graph);
-	pathfinding = new ModifiedAStar();
+	blackBoard = std::unique_ptr<Blackboard>(new Blackboard(_graph));
+	pathfinding = std::unique_ptr<ModifiedAStar>(new ModifiedAStar());
+
+	//IF AGENT HAS A SENSORY SYSTEM, ADD HIM SENSORS AND BRAIN AND SET THEM LOWER SPEED
 	if (hasSensorySystem)
 	{
 		max_velocity = 180;
-		/*sensors = std::unique_ptr<SensorySystem>(new SensorySystem(_scene));
-		brain = std::unique_ptr<FSM>(new FSM(this));*/
-		sensors = new SensorySystem(_scene);
-		brain = new FSM(this);
+		sensors = std::unique_ptr<SensorySystem>(new SensorySystem(_scene));
+		brain = std::unique_ptr<FSM>(new FSM(this));
 	}
 }
 
@@ -44,27 +41,22 @@ Agent::~Agent()
 
 	if (steering_behaviour)
 		delete steering_behaviour;
-
-	delete blackBoard;
-	delete pathfinding;
-	delete sensors;
-	delete brain;
 }
 
 void Agent::setBehavior(SteeringBehavior* behavior)
 {
 	steering_behaviour = behavior;
 }
+
+//SET A VALID POSITION FOR THE AGENT TO WANDER TO
 void Agent::ReplaceWanderPosition()
 {
-	// set the coin in a random cell (but at least 3 cells far from the agent)
 	int num_cell_x = SRC_WIDTH / CELL_SIZE;
 	int num_cell_y = SRC_HEIGHT / CELL_SIZE;
 
 	do {
 		currentGoal = Vector2D((float)(rand() % num_cell_x), (float)(rand() % num_cell_y));
-	} while (!blackBoard->graph.nodes[currentGoal.y][currentGoal.x]->isValid || (Vector2D::Distance(currentGoal, pix2cell(getPosition())) < 3));
-	
+	} while (!blackBoard->graph.nodes[currentGoal.y][currentGoal.x]->isValid || (Vector2D::Distance(currentGoal, Vector2D::pix2cell(getPosition())) < 3));	
 }
 
 Vector2D Agent::getPosition()
@@ -120,7 +112,6 @@ void Agent::setMaxVelocity(float newVelocity)
 void Agent::update(float dtime, SDL_Event* event)
 {
 	switch (event->type) {
-		/* Keyboard & Mouse events */
 	case SDL_KEYDOWN:
 		if (event->key.keysym.scancode == SDL_SCANCODE_S)
 			draw_sprite = !draw_sprite;

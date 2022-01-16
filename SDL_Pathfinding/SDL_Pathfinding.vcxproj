@@ -143,7 +143,7 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Pathfinding.cpp" />
     <ClCompile Include="..\src\PathFollowing.cpp" />
-    <ClCompile Include="..\src\CoinBattleScene.cpp" />
+    <ClCompile Include="..\src\SensorySystemScene.cpp" />
     <ClCompile Include="..\src\SDL_SimpleApp.cpp" />
     <ClCompile Include="..\src\SensorySystem.cpp" />
     <ClCompile Include="..\src\utils.cpp" />
@@ -163,7 +163,7 @@
     <ClInclude Include="..\src\Path.h" />
     <ClInclude Include="..\src\Pathfinding.h" />
     <ClInclude Include="..\src\PathFollowing.h" />
-    <ClInclude Include="..\src\CoinBattleScene.h" />
+    <ClInclude Include="..\src\SensorySystemScene.h" />
     <ClInclude Include="..\src\SensorySystem.h" />
     <ClInclude Include="..\src\utils.h" />
     <ClInclude Include="..\src\Scene.h" />

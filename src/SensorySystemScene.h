@@ -1,28 +1,31 @@
 #pragma once
-#include "Scene.h"
 #include "Grid.h"
+#include "Graph.h"
+#include "Scene.h"
 
-class AlgorithmsScene :
+class SensorySystemScene :
 	public Scene
 {
 public:
-	AlgorithmsScene();
-	~AlgorithmsScene();
+	SensorySystemScene();
+	~SensorySystemScene();
 	void update(float dtime, SDL_Event* event);
 	void draw();
 	const char* getTitle();
 
-private:
-	Vector2D coinPosition;
-	void ReplaceCoinPosition();
 	Grid* maze;
+	
+private:
+	Graph enemyGraph;
+	Graph playerGraph;
 	bool draw_grid;
-	Graph graph;
+	int count = 1;
+
+	const int NUM_AGENTS = 2;
+	const int MAX_COINS = 5;
 
 	void drawMaze();
-	void drawCoin();
 	SDL_Texture* background_texture;
 	SDL_Texture* coin_texture;
 	bool loadTextures(char* filename_bg, char* filename_coin);
 };
-

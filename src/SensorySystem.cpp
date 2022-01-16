@@ -1,23 +1,15 @@
 #include "SensorySystem.h"
-#include "CoinBattleScene.h"
+#include "SensorySystemScene.h"
 #include <iostream>
-#include "utils.h"
 
 using namespace Vector2DUtils;
 
-
-SensorySystem::SensorySystem(Scene* _scene) : scene(_scene)
-{
-}
-
-SensorySystem::~SensorySystem()
-{
-}
+SensorySystem::SensorySystem(Scene* _scene) : scene(_scene) {}
 
 void SensorySystem::Update(Agent* agent, float dTime)
 {
 	// Calculate Distance between scene player and agent
-	if (Vector2D::Distance(scene->player->getPosition(), agent->getPosition()) < agent->blackBoard->GetSeeDistance()) 
+	if (Vector2D::Distance(scene->player->getPosition(), agent->getPosition()) < agent->blackBoard->GetSeeDistance())
 	{
 		if (Vector2DUtils::IsInsideCone(scene->player->getPosition(),
 			agent->getPosition(),
@@ -28,21 +20,27 @@ void SensorySystem::Update(Agent* agent, float dTime)
 			{
 				agent->blackBoard->SetPlayerInSight(true);
 				agent->blackBoard->SetPlayerHasGun(scene->player->blackBoard->GetPlayerHasGun());
-				return;
+				//return;
 			}
 		}
 	}
-	// If there is no line trace conection, enemies don't see the player
-	agent->blackBoard->SetPlayerInSight(false);
+	else
+	{
+		// If there is no line trace conection, enemies don't see the player
+		agent->blackBoard->SetPlayerInSight(false);
+	}
 }
+
+//LINE TRACE BETWEEN THIS AGENT AND THE PLAYER THAT CHECKS IF THERE ARE WALLS BETWEEN THEM
+//IF THERE ARE WALLS, LINE TRACE RETURNS FALSE
 bool SensorySystem::LineTrace(Agent* agent) // Checks if can see the player
 {
-	Vector2D currentNode = pix2cell(agent->getPosition());
-	while (pix2cell(scene->player->getPosition()) != currentNode) {
+	Vector2D currentNode = Vector2D::pix2cell(agent->getPosition());
+	while (Vector2D::pix2cell(scene->player->getPosition()) != currentNode) {
 		if (agent->blackBoard->graph.nodes[currentNode.y][currentNode.x]->isValid)
 		{
-			float directionX = pix2cell(scene->player->getPosition()).x - currentNode.x;
-			float directionY = pix2cell(scene->player->getPosition()).y - currentNode.y;
+			float directionX = Vector2D::pix2cell(scene->player->getPosition()).x - currentNode.x;
+			float directionY = Vector2D::pix2cell(scene->player->getPosition()).y - currentNode.y;
 
 			if (directionX != 0)
 				directionX > 0 ? currentNode.x++ : currentNode.x--;

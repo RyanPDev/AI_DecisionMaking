@@ -13,5 +13,4 @@ public:
 	void Enter(Agent*, float);
 	void Exit(Agent*, float);
 	void ChooseNewGoal(Agent*);
-
 };

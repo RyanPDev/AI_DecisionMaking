@@ -6,9 +6,9 @@ class SensorySystem
 {
 private:
 	bool LineTrace(Agent* agent);
+
 public:
 	SensorySystem(Scene*);
-	~SensorySystem();
 
 	void Update(Agent* agent, float dTime);
 	Scene* scene;

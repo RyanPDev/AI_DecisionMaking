@@ -10,7 +10,6 @@ class Grid
 {
 public:
 	Grid(char* filename);
-	~Grid();
 
 private:
 	int num_cell_x;

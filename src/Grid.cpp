@@ -25,10 +25,6 @@ Grid::Grid(char* filename)
 	infile.close();
 }
 
-Grid::~Grid()
-{
-}
-
 int Grid::getNumCellX()
 {
 	return num_cell_x;
@@ -38,7 +34,6 @@ int Grid::getNumCellY()
 {
 	return num_cell_y;
 }
-
 
 bool Grid::isValidCell(Vector2D cell)
 {

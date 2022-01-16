@@ -12,7 +12,7 @@ private:
 
 public:
 	Blackboard(Graph);
-	~Blackboard();
+
 	Graph graph;
 
 	//SETTERS

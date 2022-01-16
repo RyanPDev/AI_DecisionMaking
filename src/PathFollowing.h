@@ -5,8 +5,10 @@
 class PathFollowing :
 	public Agent::SteeringBehavior
 {
+private:
+	void applySteeringForce(Agent *agent, float dtime);
+
 public:
 	PathFollowing();
 	~PathFollowing();
-	void applySteeringForce(Agent *agent, float dtime);
 };

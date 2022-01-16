@@ -14,13 +14,8 @@ private:
 	};
 	std::priority_queue < Graph::Node*, std::vector<Graph::Node*>, ComparePriority > frontier;
 
-	const float alpha = 0.3;
-	const float beta = 0.7;
-
-public:
-	ModifiedAStar();
-	~ModifiedAStar();
-	void CalculatePath(Graph, Path&, Vector2D, Vector2D);
+	const float alpha = 0.5;
+	const float beta = 0.5;
 	void Clear(std::priority_queue < Graph::Node*, std::vector<Graph::Node*>, ComparePriority >& q, Graph graph);
+	void CalculatePath(Graph, Path&, Vector2D, Vector2D);
 };
-
