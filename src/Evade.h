@@ -11,6 +11,6 @@ private:
 public:
     IFSMState* Update(Agent*, float);
     void Enter(Agent*, float);
-    void ChooseEscapeGoal(Agent* agent);
+    void ChooseNewGoal(Agent* agent);
     void Exit(Agent*, float);
 };

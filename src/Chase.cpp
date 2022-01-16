@@ -10,7 +10,7 @@ IFSMState* Chase::Update(Agent* agent, float dtime)
 	timer -= dtime;
 	if (timer <= 0)
 	{
-		agent->ChooseNewGoal(pix2cell(agent->sensors->scene->player->getPosition()));
+		ChooseNewGoal(agent);
 		timer = MAX_TIMER;
 
 	}
@@ -32,11 +32,16 @@ IFSMState* Chase::Update(Agent* agent, float dtime)
 
 void Chase::Enter(Agent* agent, float dtime)
 {
-	agent->ChooseNewGoal(pix2cell(agent->sensors->scene->player->getPosition()));
+	ChooseNewGoal(agent);
 	timer = MAX_TIMER;
 }
 
 void Chase::Exit(Agent* agent, float dtime)
 {
 	agent->blackBoard->graph.ResetAllWeights();
+}
+
+void Chase::ChooseNewGoal(Agent* agent)
+{
+	agent->ChooseNewGoal(pix2cell(agent->sensors->scene->player->getPosition()));
 }

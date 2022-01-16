@@ -5,7 +5,7 @@ class Scene;
 class SensorySystem
 {
 private:
-
+	bool LineTrace(Agent* agent);
 public:
 	SensorySystem(Scene*);
 	~SensorySystem();
