@@ -1,11 +1,15 @@
-# Decision Making Algorithms With a Sensory System
+# Decision Making Algorithms With a Sensory System and Blackboard
 
 Run solution in x86 format.
 
 ---CONTROLS---
+
 Left Click --> Move player
+
 P --> Drop Gun
+
 G --> Draw Grid
+
 SPACE --> Draw Paths
 
 
