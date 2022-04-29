@@ -1,4 +1,4 @@
-AA3_Pathfinding
+# Decision Making Algorithms With a Sensory System
 
 Run solution in x86 format.
 
